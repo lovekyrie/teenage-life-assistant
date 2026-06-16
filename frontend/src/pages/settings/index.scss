@@ -1,0 +1,51 @@
+.settings-page {
+  .section-title {
+    margin: 0 0 16px;
+  }
+
+  .hint {
+    display: block;
+    margin-bottom: 20px;
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 24px;
+  }
+
+  .manage-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .manage-row:last-child {
+    border-bottom: none;
+  }
+
+  .manage-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .manage-name {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .manage-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .meta-text {
+    color: #6b7280;
+    font-size: 24px;
+  }
+
+  .empty-inline {
+    color: #9ca3af;
+  }
+}

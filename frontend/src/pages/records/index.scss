@@ -1,0 +1,39 @@
+.records-page {
+  .record-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .record-name {
+    display: block;
+    font-weight: 600;
+  }
+
+  .record-time {
+    display: block;
+    margin-top: 8px;
+    color: #9ca3af;
+    font-size: 24px;
+  }
+
+  .record-side {
+    text-align: right;
+  }
+
+  .points-add {
+    display: block;
+    margin-bottom: 12px;
+    color: #16a34a;
+    font-weight: 700;
+  }
+
+  .points-sub {
+    display: block;
+    margin-bottom: 12px;
+    color: #dc2626;
+    font-weight: 700;
+  }
+}

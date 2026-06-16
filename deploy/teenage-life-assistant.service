@@ -1,0 +1,15 @@
+[Unit]
+Description=Teenage Life Assistant API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/teenage-life-assistant/backend
+EnvironmentFile=/opt/teenage-life-assistant/backend/config/.env
+ExecStart=/opt/teenage-life-assistant/backend/app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

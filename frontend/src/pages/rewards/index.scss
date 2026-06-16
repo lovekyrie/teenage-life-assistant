@@ -1,0 +1,45 @@
+.rewards-page {
+  .summary-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .summary-points {
+    font-size: 56px;
+    font-weight: 700;
+    color: #6366f1;
+  }
+
+  .link {
+    color: #6366f1;
+    font-size: 26px;
+  }
+
+  .reward-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .reward-name {
+    display: block;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .reward-desc {
+    display: block;
+    margin-top: 8px;
+    color: #6b7280;
+  }
+
+  .reward-cost {
+    display: block;
+    margin-top: 12px;
+    color: #6366f1;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,25 @@
+.login-page {
+  min-height: 100vh;
+  padding: 120px 48px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(180deg, #eef2ff 0%, #f5f6fa 40%);
+}
+
+.hero {
+  margin-bottom: 80px;
+}
+
+.title {
+  display: block;
+  font-size: 56px;
+  font-weight: 700;
+  color: #312e81;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 16px;
+  color: #6b7280;
+}
