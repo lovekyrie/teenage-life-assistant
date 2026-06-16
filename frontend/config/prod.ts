@@ -3,7 +3,7 @@ export default {
     NODE_ENV: '"production"'
   },
   defineConstants: {
-    API_BASE: '"https://your-domain.com"'
+    API_BASE: '"https://feng-fortitude.com:8087"'
   },
   mini: {},
   h5: {}
