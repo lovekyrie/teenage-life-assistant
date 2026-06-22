@@ -1,15 +1,19 @@
 import { View, Text } from '@tarojs/components'
 import { Button } from '@taroify/core'
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
 import { authApi } from '@/services/api'
 import { useAppStore } from '@/store/app'
-import { showError } from '@/utils/auth'
+import { redirectAfterLogin, restoreSessionIfLoggedIn, showError } from '@/utils/auth'
 import './index.scss'
 
 export default function LoginPage() {
   const setAuth = useAppStore((s) => s.setAuth)
   const [loading, setLoading] = useState(false)
+
+  useDidShow(() => {
+    restoreSessionIfLoggedIn()
+  })
 
   const handleLogin = async () => {
     setLoading(true)
@@ -17,11 +21,7 @@ export default function LoginPage() {
       const { code } = await Taro.login()
       const result = await authApi.login(code)
       setAuth(result.user, result.token)
-      if (result.need_family) {
-        await Taro.reLaunch({ url: '/pages/family-setup/index' })
-      } else {
-        await Taro.reLaunch({ url: '/pages/index/index' })
-      }
+      await redirectAfterLogin(result.need_family)
     } catch (error) {
       showError(error)
     } finally {

@@ -1,10 +1,10 @@
 import { View, Text } from '@tarojs/components'
 import { Button, Field, Input, Tabs } from '@taroify/core'
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
 import { familyApi } from '@/services/api'
 import { useAppStore } from '@/store/app'
-import { showError } from '@/utils/auth'
+import { ensureAuth, showError, syncFamilyFromServer } from '@/utils/auth'
 import type { User } from '@/types'
 import './index.scss'
 
@@ -16,9 +16,18 @@ export default function FamilySetupPage() {
   const [inviteCode, setInviteCode] = useState('')
   const [loading, setLoading] = useState(false)
 
+  useDidShow(async () => {
+    if (!(await ensureAuth())) return
+    try {
+      await syncFamilyFromServer()
+      await Taro.reLaunch({ url: '/pages/index/index' })
+    } catch {
+      // 未加入家庭，留在当前页
+    }
+  })
+
   const goHome = async () => {
-    const data = await familyApi.me()
-    setFamilyData(data.family, data.kids)
+    await syncFamilyFromServer()
     await Taro.reLaunch({ url: '/pages/index/index' })
   }
 
@@ -35,6 +44,11 @@ export default function FamilySetupPage() {
       Taro.showToast({ title: '创建成功', icon: 'success' })
       await Taro.reLaunch({ url: '/pages/settings/index' })
     } catch (error) {
+      const message = error instanceof Error ? error.message : ''
+      if (message.includes('已加入家庭')) {
+        await goHome()
+        return
+      }
       showError(error)
     } finally {
       setLoading(false)
