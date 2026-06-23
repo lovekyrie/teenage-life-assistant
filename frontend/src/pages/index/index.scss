@@ -1,5 +1,6 @@
 .home-page {
   background: #f4f7fb;
+  padding-bottom: 40px;
 
   .home-hero {
     margin: 24px;
@@ -258,9 +259,13 @@
   }
 
   .reward-chip {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
     vertical-align: top;
-    width: 220px;
+    box-sizing: border-box;
+    width: 300px;
+    height: 132px;
     padding: 20px;
     margin-right: 16px;
     border: 1px solid rgba(43, 138, 130, 0.12);
@@ -274,8 +279,12 @@
 
   .reward-name {
     display: block;
+    width: 100%;
+    overflow: hidden;
     font-weight: 600;
-    white-space: normal;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .reward-cost {

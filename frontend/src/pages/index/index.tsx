@@ -1,5 +1,4 @@
 import { View, Text, ScrollView } from '@tarojs/components'
-import { Button } from '@taroify/core'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
 import { familyApi, recordApi, rewardApi } from '@/services/api'
@@ -141,7 +140,7 @@ export default function IndexPage() {
           <Text className='link' onClick={() => Taro.navigateTo({ url: '/pages/records/index' })}>全部</Text>
         </View>
         {records.length === 0 ? (
-          <Text className='empty-inline'>暂无记录，点击下方按钮开始记录</Text>
+          <Text className='empty-inline'>暂无记录，使用上方入口开始记录</Text>
         ) : (
           records.map((item) => (
             <View className='record-row' key={item.id}>
@@ -174,12 +173,6 @@ export default function IndexPage() {
           })}
           {rewards.length === 0 && <Text className='empty-inline'>暂无奖励，可在设置页导入</Text>}
         </ScrollView>
-      </View>
-
-      <View className='bottom-bar'>
-        <Button color='success' onClick={() => goPointPick('add')}>+ 增加积分</Button>
-        <Button color='warning' onClick={() => goPointPick('subtract')}>- 减少积分</Button>
-        <Button color='primary' onClick={() => Taro.navigateTo({ url: '/pages/rewards/index' })}>兑换奖励</Button>
       </View>
     </View>
   )
