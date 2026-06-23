@@ -1,45 +1,78 @@
 .rewards-page {
+  background: #f4f7fb;
+
   .summary-bar {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    color: #fff;
+    background:
+      linear-gradient(135deg, rgba(47, 72, 88, 0.96), rgba(43, 138, 130, 0.92)),
+      linear-gradient(45deg, rgba(246, 179, 71, 0.22), rgba(229, 93, 78, 0.14));
+    border: none;
   }
 
   .summary-points {
     font-size: 56px;
     font-weight: 700;
-    color: #6366f1;
+    color: #fff;
   }
 
   .link {
-    color: #6366f1;
+    color: rgba(255, 255, 255, 0.86);
     font-size: 26px;
+    font-weight: 600;
   }
 
   .reward-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
     margin-top: 0;
     margin-bottom: 16px;
+    border-left: 6px solid #f0a733;
+  }
+
+  .reward-info {
+    flex: 1;
+    min-width: 0;
   }
 
   .reward-name {
     display: block;
     font-size: 32px;
     font-weight: 600;
+    line-height: 1.35;
   }
 
   .reward-desc {
     display: block;
     margin-top: 8px;
-    color: #6b7280;
+    color: #697986;
+    font-size: 25px;
+    line-height: 1.5;
+  }
+
+  .reward-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
   }
 
   .reward-cost {
     display: block;
-    margin-top: 12px;
-    color: #6366f1;
-    font-weight: 600;
+    color: #2b8a82;
+    font-weight: 700;
+  }
+
+  .reward-stock {
+    display: block;
+    padding: 4px 10px;
+    color: #73521d;
+    background: #fff7e5;
+    border-radius: 8px;
+    font-size: 22px;
   }
 }

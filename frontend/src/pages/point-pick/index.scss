@@ -1,21 +1,31 @@
 .point-pick-page {
+  background: #f4f7fb;
+
   .point-tabs {
     display: flex;
     gap: 12px;
-    padding: 0 24px 16px;
+    padding: 24px 24px 18px;
     overflow-x: auto;
   }
 
   .point-tab {
     flex-shrink: 0;
-    padding: 12px 24px;
-    border-radius: 999px;
+    min-width: 108px;
+    height: 56px;
+    padding: 0 22px;
+    border: 1px solid rgba(47, 72, 88, 0.08);
+    border-radius: 8px;
     background: #fff;
-    color: #6b7280;
+    color: #697986;
+    font-weight: 600;
+    line-height: 56px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(47, 72, 88, 0.04);
   }
 
   .point-tab.active {
-    background: #6366f1;
+    background: #2b8a82;
+    border-color: #2b8a82;
     color: #fff;
   }
 
@@ -26,38 +36,62 @@
   .action-card {
     margin-top: 0;
     margin-bottom: 20px;
+    border-left: 6px solid #2b8a82;
   }
 
   .action-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
   }
 
   .action-name {
     font-size: 32px;
     font-weight: 600;
+    line-height: 1.35;
   }
 
   .action-points {
-    color: #6366f1;
-    font-weight: 600;
+    flex-shrink: 0;
+    color: #2b8a82;
+    font-weight: 700;
   }
 
   .action-category {
     display: inline-block;
     margin-top: 12px;
     padding: 4px 12px;
-    border-radius: 999px;
-    background: #eef2ff;
-    color: #4f46e5;
+    border-radius: 8px;
+    background: #f2fbf8;
+    color: #2b8a82;
     font-size: 22px;
   }
 
   .action-desc {
     display: block;
     margin-top: 12px;
-    color: #6b7280;
+    color: #697986;
     line-height: 1.5;
+  }
+
+  &.subtract {
+    .point-tab.active {
+      background: #e55d4e;
+      border-color: #e55d4e;
+    }
+
+    .action-card {
+      border-left-color: #e55d4e;
+    }
+
+    .action-points {
+      color: #e55d4e;
+    }
+
+    .action-category {
+      color: #b94437;
+      background: #fff2ef;
+    }
   }
 }

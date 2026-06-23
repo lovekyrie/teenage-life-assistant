@@ -1,0 +1,130 @@
+.guide-page {
+  background: #f4f7fb;
+
+  .guide-hero {
+    margin: 24px 24px 16px;
+    padding: 36px 32px;
+    color: #fff;
+    background:
+      linear-gradient(135deg, rgba(47, 72, 88, 0.96), rgba(43, 138, 130, 0.92)),
+      linear-gradient(45deg, rgba(246, 179, 71, 0.28), rgba(229, 93, 78, 0.12));
+    border-radius: 8px;
+    box-shadow: 0 16px 36px rgba(47, 72, 88, 0.18);
+  }
+
+  .eyebrow {
+    display: block;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 22px;
+  }
+
+  .guide-title {
+    display: block;
+    margin-top: 10px;
+    font-size: 42px;
+    font-weight: 700;
+  }
+
+  .guide-subtitle {
+    display: block;
+    margin-top: 14px;
+    max-width: 560px;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 26px;
+    line-height: 1.6;
+  }
+
+  .guide-section {
+    margin: 24px;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid rgba(47, 72, 88, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(47, 72, 88, 0.06);
+  }
+
+  .section-title {
+    margin: 0 0 20px;
+  }
+
+  .step-row {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #edf1f5;
+  }
+
+  .step-row:last-child {
+    border-bottom: none;
+  }
+
+  .step-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+    background: #2b8a82;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .step-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .step-title {
+    display: block;
+    color: #172026;
+    font-weight: 700;
+  }
+
+  .step-desc {
+    display: block;
+    margin-top: 8px;
+    color: #697986;
+    font-size: 25px;
+    line-height: 1.55;
+  }
+
+  .field-row {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid #edf1f5;
+  }
+
+  .field-row:last-child {
+    border-bottom: none;
+  }
+
+  .field-name {
+    flex: 0 0 144px;
+    color: #172026;
+    font-weight: 700;
+  }
+
+  .field-value {
+    flex: 1;
+    color: #697986;
+    font-size: 25px;
+    line-height: 1.5;
+  }
+
+  .notice-section {
+    border-color: rgba(246, 179, 71, 0.24);
+    background: #fffaf1;
+  }
+
+  .notice-text {
+    display: block;
+    margin-top: 12px;
+    color: #73521d;
+    font-size: 25px;
+    line-height: 1.6;
+  }
+}

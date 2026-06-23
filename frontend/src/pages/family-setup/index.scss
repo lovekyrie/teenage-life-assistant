@@ -1,18 +1,35 @@
 .family-setup {
+  background: #f4f7fb;
+
+  .intro {
+    color: #fff;
+    background:
+      linear-gradient(135deg, rgba(47, 72, 88, 0.96), rgba(43, 138, 130, 0.92)),
+      linear-gradient(45deg, rgba(246, 179, 71, 0.22), rgba(229, 93, 78, 0.14));
+    border: none;
+  }
+
   .intro-title {
     display: block;
-    font-size: 34px;
-    font-weight: 600;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.25;
   }
 
   .intro-desc {
     display: block;
     margin-top: 12px;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.82);
     line-height: 1.6;
   }
 
   .taroify-tabs {
     margin-top: 8px;
+  }
+
+  .taroify-tabs__wrap {
+    margin: 0 24px;
+    border-radius: 8px;
+    overflow: hidden;
   }
 }

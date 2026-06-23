@@ -57,7 +57,7 @@ export default function PointPickPage() {
   }
 
   return (
-    <View className='page point-pick-page'>
+    <View className={`page point-pick-page ${type}`}>
       {groups.length === 0 ? (
         <View className='empty-tip'>暂无{type === 'add' ? '加分' : '减分'}行为，请先在设置页导入 Excel</View>
       ) : (

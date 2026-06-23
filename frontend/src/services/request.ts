@@ -84,3 +84,19 @@ export async function uploadFile<T>(url: string, filePath: string, name = 'file'
   }
   return body.data as T
 }
+
+export async function downloadFile(url: string): Promise<string> {
+  const token = getToken()
+  const res = await Taro.downloadFile({
+    url: `${API_BASE}${url}`,
+    header: token ? { Authorization: `Bearer ${token}` } : {}
+  })
+  if (res.statusCode === 401) {
+    await handleUnauthorized()
+    throw new Error('登录已失效')
+  }
+  if (res.statusCode !== 200) {
+    throw new Error('下载失败')
+  }
+  return res.tempFilePath
+}

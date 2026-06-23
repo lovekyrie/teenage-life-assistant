@@ -32,6 +32,10 @@ export default function LoginPage() {
   return (
     <View className='login-page'>
       <View className='hero'>
+        <View className='brand-mark'>
+          <Text className='brand-score'>+3</Text>
+          <Text className='brand-note'>今日进步</Text>
+        </View>
         <Text className='title'>成长积分</Text>
         <Text className='subtitle'>记录每一次进步，兑换小小奖励</Text>
       </View>

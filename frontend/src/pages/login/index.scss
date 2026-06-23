@@ -1,25 +1,55 @@
 .login-page {
   min-height: 100vh;
-  padding: 120px 48px 48px;
+  padding: 112px 48px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(180deg, #eef2ff 0%, #f5f6fa 40%);
+  background:
+    linear-gradient(180deg, rgba(47, 72, 88, 0.08) 0%, rgba(244, 247, 251, 0) 42%),
+    #f4f7fb;
 }
 
 .hero {
   margin-bottom: 80px;
 }
 
+.brand-mark {
+  width: 188px;
+  padding: 24px;
+  margin-bottom: 34px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(47, 72, 88, 0.98), rgba(43, 138, 130, 0.94)),
+    linear-gradient(45deg, rgba(246, 179, 71, 0.24), rgba(229, 93, 78, 0.14));
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(47, 72, 88, 0.18);
+}
+
+.brand-score {
+  display: block;
+  font-size: 58px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.brand-note {
+  display: block;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 24px;
+}
+
 .title {
   display: block;
-  font-size: 56px;
+  font-size: 60px;
   font-weight: 700;
-  color: #312e81;
+  color: #172026;
+  line-height: 1.15;
 }
 
 .subtitle {
   display: block;
   margin-top: 16px;
-  color: #6b7280;
+  color: #697986;
+  line-height: 1.6;
 }

@@ -21,6 +21,7 @@ func SetupRouter(cfg *config.Config, svc *service.Service) *gin.Engine {
 	api := r.Group("/api")
 	{
 		api.POST("/auth/login", h.Login)
+		api.GET("/point-actions/import-template", h.DownloadImportTemplate)
 
 		auth := api.Group("")
 		auth.Use(middleware.JWTAuth(cfg.JWTSecret, svc.LookupUserFamily))

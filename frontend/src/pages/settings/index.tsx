@@ -3,7 +3,7 @@ import { Button, Cell, Field, Input, Tag } from '@taroify/core'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
 import { actionApi, familyApi, kidApi, rewardApi } from '@/services/api'
-import { uploadFile } from '@/services/request'
+import { downloadFile, uploadFile } from '@/services/request'
 import { useAppStore } from '@/store/app'
 import { ensureAuth, ensureFamily, showError } from '@/utils/auth'
 import { confirm } from '@/utils/confirm'
@@ -87,6 +87,22 @@ export default function SettingsPage() {
     }
   }
 
+  const handleDownloadTemplate = async () => {
+    try {
+      Taro.showLoading({ title: '下载中' })
+      const filePath = await downloadFile('/api/point-actions/import-template')
+      Taro.hideLoading()
+      await Taro.openDocument({
+        filePath,
+        fileType: 'xlsx',
+        showMenu: true
+      } as any)
+    } catch (error) {
+      Taro.hideLoading()
+      showError(error)
+    }
+  }
+
   const handleDeleteAction = async (action: PointAction) => {
     const ok = await confirm('停用行为', `确定停用「${action.name}」吗？历史记录会保留。`)
     if (!ok) return
@@ -118,15 +134,30 @@ export default function SettingsPage() {
 
   return (
     <View className='page settings-page'>
-      <View className='card'>
-        <Text className='section-title'>家庭信息</Text>
-        <Cell title='家庭名称' brief={family?.name || '-'} />
-        <Cell
-          title='邀请码'
-          brief={family?.invite_code || '-'}
-          isLink
-          onClick={copyInviteCode}
-        />
+      <View className='settings-hero'>
+        <View>
+          <Text className='eyebrow'>家庭管理</Text>
+          <Text className='settings-title'>{family?.name || '成长积分'}</Text>
+          <Text className='settings-subtitle'>管理孩子、积分行为和奖励模板</Text>
+        </View>
+        <View className='invite-pill' onClick={copyInviteCode}>
+          <Text className='invite-label'>邀请码</Text>
+          <Text className='invite-code'>{family?.invite_code || '-'}</Text>
+        </View>
+      </View>
+
+      <View className='card import-card'>
+        <View className='card-header'>
+          <View>
+            <Text className='section-title'>数据导入</Text>
+            <Text className='hint'>下载模板后按表头填写，再上传 Excel。再次导入会按模板启用行为和奖励，历史记录保留。</Text>
+          </View>
+        </View>
+        <View className='import-actions'>
+          <Button color='primary' block onClick={handleDownloadTemplate}>下载模板</Button>
+          <Button block variant='outlined' onClick={handleImportExcel}>上传 Excel</Button>
+        </View>
+        <Text className='guide-link' onClick={() => Taro.navigateTo({ url: '/pages/guide/index' })}>查看使用说明</Text>
       </View>
 
       <View className='card'>
@@ -142,12 +173,6 @@ export default function SettingsPage() {
           />
         </Field>
         <Button color='primary' block loading={loading} onClick={handleAddKid}>添加孩子</Button>
-      </View>
-
-      <View className='card'>
-        <Text className='section-title'>数据导入</Text>
-        <Text className='hint'>上传 Excel 覆盖导入（按名称+分值合并），历史记录保留。模板见 docs/excel-template.md</Text>
-        <Button block onClick={handleImportExcel}>上传 Excel</Button>
       </View>
 
       <View className='card'>

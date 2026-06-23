@@ -52,7 +52,7 @@ export default function RecordsPage() {
           <View key={group.date}>
             <Text className='section-title'>{group.date}</Text>
             {group.list.map((item) => (
-              <View className='card record-card' key={item.id}>
+              <View className={`card record-card ${item.type}`} key={item.id}>
                 <View className='record-main'>
                   <Text className='record-name'>{item.action?.name || item.note || '积分变动'}</Text>
                   <Text className='record-time'>{formatDateTime(item.created_at)}</Text>

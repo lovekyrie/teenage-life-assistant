@@ -7,7 +7,8 @@ export default defineAppConfig({
     'pages/records/index',
     'pages/rewards/index',
     'pages/redemptions/index',
-    'pages/settings/index'
+    'pages/settings/index',
+    'pages/guide/index'
   ],
   window: {
     backgroundTextStyle: 'light',

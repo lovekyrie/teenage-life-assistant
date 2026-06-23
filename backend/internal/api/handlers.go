@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/duanyupeng/teenage-life-assistant/internal/excel"
 	"github.com/duanyupeng/teenage-life-assistant/internal/middleware"
 	"github.com/duanyupeng/teenage-life-assistant/internal/model"
 	"github.com/duanyupeng/teenage-life-assistant/internal/response"
@@ -204,6 +205,17 @@ func (h *Handler) DeletePointAction(c *gin.Context) {
 		return
 	}
 	response.OK(c, nil)
+}
+
+func (h *Handler) DownloadImportTemplate(c *gin.Context) {
+	data, err := excel.BuildImportTemplate()
+	if err != nil {
+		response.Internal(c, "生成模板失败")
+		return
+	}
+	c.Header("Content-Disposition", `attachment; filename="growth-points-template.xlsx"`)
+	c.Header("Content-Length", strconv.Itoa(len(data)))
+	c.Data(200, excel.ImportTemplateMimeType(), data)
 }
 
 func generateTempName(ext string) (string, error) {

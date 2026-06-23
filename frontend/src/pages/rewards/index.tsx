@@ -66,10 +66,13 @@ export default function RewardsPage() {
           const enough = (summary?.total_points ?? 0) >= reward.points_cost
           return (
             <View className='card reward-card' key={reward.id}>
-              <View>
+              <View className='reward-info'>
                 <Text className='reward-name'>{reward.name}</Text>
                 {reward.description && <Text className='reward-desc'>{reward.description}</Text>}
-                <Text className='reward-cost'>{reward.points_cost} 分</Text>
+                <View className='reward-meta'>
+                  <Text className='reward-cost'>{reward.points_cost} 分</Text>
+                  {reward.stock >= 0 && <Text className='reward-stock'>剩余 {reward.stock}</Text>}
+                </View>
               </View>
               <Button size='small' color='primary' disabled={!enough} onClick={() => handleRedeem(reward)}>
                 兑换

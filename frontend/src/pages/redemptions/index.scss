@@ -1,29 +1,36 @@
 .redemptions-page {
+  background: #f4f7fb;
+
   .redemption-card {
     margin-top: 0;
     margin-bottom: 16px;
+    border-left: 6px solid #f0a733;
   }
 
   .redemption-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 18px;
   }
 
   .reward-name {
     font-size: 32px;
     font-weight: 600;
+    line-height: 1.35;
   }
 
   .meta {
     display: block;
     margin-top: 12px;
-    color: #6b7280;
+    color: #697986;
+    font-size: 25px;
   }
 
   .actions {
     display: flex;
     gap: 16px;
     margin-top: 20px;
+    flex-wrap: wrap;
   }
 }

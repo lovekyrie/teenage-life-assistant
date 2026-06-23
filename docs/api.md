@@ -21,6 +21,7 @@
 
 ## 积分行为
 
+- GET /api/point-actions/import-template
 - GET /api/point-actions?type=add|subtract
 - POST /api/point-actions
 - PUT /api/point-actions/:id
@@ -48,4 +49,4 @@
 - PUT /api/redemptions/:id/fulfill
 - PUT /api/redemptions/:id/cancel
 
-所有除 login 外接口需 Header: `Authorization: Bearer <token>`
+除登录和模板下载外，其他接口需 Header: `Authorization: Bearer <token>`
