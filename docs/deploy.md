@@ -72,7 +72,7 @@ Settings → Secrets and variables → Actions → New repository secret：
 | `SERVER_HOST` | 服务器 IP 或域名 |
 | `SERVER_USER` | SSH 用户名，如 `root` / `ubuntu` |
 | `SERVER_SSH_KEY` | 私钥全文（对应服务器 `~/.ssh/authorized_keys`） |
-| `SERVER_PORT` | 可选，默认 22 |
+| `SERVER_PORT` | 可选，SSH 端口，供 `.github/workflows/deploy-backend.yml` 的 `appleboy/ssh-action` 使用，默认 22 |
 | `DEPLOY_PATH` | 可选，默认 `/opt/teenage-life-assistant` |
 
 ### 3. 工作流文件
