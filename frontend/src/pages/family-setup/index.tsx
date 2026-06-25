@@ -20,7 +20,7 @@ export default function FamilySetupPage() {
     if (!(await ensureAuth())) return
     try {
       await syncFamilyFromServer()
-      await Taro.reLaunch({ url: '/pages/index/index' })
+      await Taro.switchTab({ url: '/pages/index/index' })
     } catch {
       // 未加入家庭，留在当前页
     }
@@ -28,7 +28,7 @@ export default function FamilySetupPage() {
 
   const goHome = async () => {
     await syncFamilyFromServer()
-    await Taro.reLaunch({ url: '/pages/index/index' })
+    await Taro.switchTab({ url: '/pages/index/index' })
   }
 
   const handleCreate = async () => {
@@ -42,7 +42,7 @@ export default function FamilySetupPage() {
       updateUser(result.user)
       setFamilyData(result.family, [])
       Taro.showToast({ title: '创建成功', icon: 'success' })
-      await Taro.reLaunch({ url: '/pages/settings/index' })
+      await Taro.switchTab({ url: '/pages/settings/index' })
     } catch (error) {
       const message = error instanceof Error ? error.message : ''
       if (message.includes('已加入家庭')) {

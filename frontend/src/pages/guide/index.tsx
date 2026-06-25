@@ -1,6 +1,7 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { Button } from '@taroify/core'
 import Taro from '@tarojs/taro'
+import { uiImages } from '@/assets/ui'
 import { downloadFile } from '@/services/request'
 import { showError } from '@/utils/auth'
 import './index.scss'
@@ -61,9 +62,12 @@ export default function GuidePage() {
   return (
     <View className='page guide-page'>
       <View className='guide-hero'>
-        <Text className='eyebrow'>使用说明</Text>
-        <Text className='guide-title'>从模板到积分记录</Text>
-        <Text className='guide-subtitle'>按顺序完成配置后，就可以开始记录成长积分和兑换奖励。</Text>
+        <View className='guide-hero-copy'>
+          <Text className='eyebrow'>使用说明</Text>
+          <Text className='guide-title'>从模板到积分记录</Text>
+          <Text className='guide-subtitle'>按顺序完成配置后，就可以开始记录成长积分和兑换奖励。</Text>
+        </View>
+        <Image className='guide-hero-image' src={uiImages.guideHero} mode='aspectFit' />
       </View>
 
       <View className='guide-section'>

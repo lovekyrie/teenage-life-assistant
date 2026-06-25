@@ -13,6 +13,7 @@ func SetupRouter(cfg *config.Config, svc *service.Service) *gin.Engine {
 	r.Use(middleware.CORS())
 
 	h := NewHandler(svc)
+	r.Static("/static", "./static")
 
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})

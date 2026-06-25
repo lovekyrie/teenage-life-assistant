@@ -1,31 +1,80 @@
 .point-pick-page {
-  background: #f4f7fb;
+  background: #ecfbf7;
+
+  .point-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    margin: 24px;
+    padding: 30px;
+    color: #fff;
+    background:
+      radial-gradient(circle at 88% 16%, rgba(255, 228, 168, 0.82) 0, rgba(255, 228, 168, 0.82) 40px, transparent 41px),
+      linear-gradient(135deg, #25c2b5 0%, #18afa3 52%, #2f9e6d 100%);
+    border-radius: 8px;
+    box-shadow: 0 18px 42px rgba(25, 130, 119, 0.2);
+  }
+
+  .point-hero-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .point-eyebrow {
+    display: block;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 23px;
+  }
+
+  .point-title {
+    display: block;
+    margin-top: 8px;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .point-subtitle {
+    display: block;
+    margin-top: 12px;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 25px;
+    line-height: 1.5;
+  }
+
+  .point-hero-icon {
+    flex: 0 0 104px;
+    width: 104px;
+    height: 104px;
+  }
 
   .point-tabs {
     display: flex;
     gap: 12px;
-    padding: 24px 24px 18px;
+    padding: 0 24px 18px;
     overflow-x: auto;
+    white-space: nowrap;
   }
 
   .point-tab {
     flex-shrink: 0;
     min-width: 108px;
-    height: 56px;
-    padding: 0 22px;
-    border: 1px solid rgba(47, 72, 88, 0.08);
+    height: 58px;
+    padding: 0 24px;
+    border: 1px solid rgba(40, 183, 167, 0.16);
     border-radius: 8px;
     background: #fff;
-    color: #697986;
+    color: #607a76;
     font-weight: 600;
-    line-height: 56px;
+    line-height: 58px;
     text-align: center;
-    box-shadow: 0 8px 18px rgba(47, 72, 88, 0.04);
+    box-shadow: 0 8px 18px rgba(35, 103, 96, 0.05);
   }
 
   .point-tab.active {
-    background: #2b8a82;
-    border-color: #2b8a82;
+    background: #18afa3;
+    border-color: #18afa3;
     color: #fff;
   }
 
@@ -34,27 +83,40 @@
   }
 
   .action-card {
+    position: relative;
+    min-height: 126px;
     margin-top: 0;
-    margin-bottom: 20px;
-    border-left: 6px solid #2b8a82;
+    margin-bottom: 18px;
+    padding-left: 118px;
+    border-left: 6px solid #2f9e6d;
+  }
+
+  .action-icon {
+    position: absolute;
+    left: 28px;
+    top: 30px;
+    width: 66px;
+    height: 66px;
   }
 
   .action-head {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    align-items: flex-start;
+    gap: 18px;
   }
 
   .action-name {
+    min-width: 0;
+    color: #172026;
     font-size: 32px;
     font-weight: 600;
     line-height: 1.35;
   }
 
   .action-points {
-    flex-shrink: 0;
-    color: #2b8a82;
+    flex: 0 0 auto;
+    color: #2f9e6d;
     font-weight: 700;
   }
 
@@ -63,19 +125,41 @@
     margin-top: 12px;
     padding: 4px 12px;
     border-radius: 8px;
-    background: #f2fbf8;
-    color: #2b8a82;
+    background: #e8f9f5;
+    color: #168a80;
     font-size: 22px;
   }
 
   .action-desc {
     display: block;
     margin-top: 12px;
-    color: #697986;
+    color: #667b78;
     line-height: 1.5;
   }
 
+  .empty-card {
+    margin: 24px;
+    padding: 64px 24px;
+    color: #8a99a6;
+    text-align: center;
+    background: #fff;
+    border: 1px solid rgba(40, 183, 167, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 12px 28px rgba(35, 103, 96, 0.08);
+  }
+
   &.subtract {
+    .point-hero {
+      background:
+        radial-gradient(circle at 88% 16%, rgba(255, 228, 168, 0.78) 0, rgba(255, 228, 168, 0.78) 40px, transparent 41px),
+        linear-gradient(135deg, #ff8a73 0%, #e55d4e 52%, #c44739 100%);
+      box-shadow: 0 18px 42px rgba(197, 64, 48, 0.18);
+    }
+
+    .point-tab {
+      border-color: rgba(229, 93, 78, 0.16);
+    }
+
     .point-tab.active {
       background: #e55d4e;
       border-color: #e55d4e;

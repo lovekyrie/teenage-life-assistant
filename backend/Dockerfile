@@ -15,6 +15,7 @@ WORKDIR /app
 
 COPY --from=builder /app/app .
 COPY config/.env.example config/.env.example
+COPY static ./static
 
 RUN mkdir -p /app/data
 VOLUME ["/app/data"]

@@ -18,7 +18,7 @@ export async function syncFamilyFromServer() {
 export async function redirectAfterLogin(needFamily: boolean) {
   try {
     await syncFamilyFromServer()
-    await Taro.reLaunch({ url: '/pages/index/index' })
+    await Taro.switchTab({ url: '/pages/index/index' })
   } catch (error) {
     const message = error instanceof Error ? error.message : ''
     if (isNeedFamilyError(message) || needFamily) {
@@ -34,7 +34,7 @@ export async function restoreSessionIfLoggedIn() {
   if (!getToken()) return false
   try {
     await syncFamilyFromServer()
-    await Taro.reLaunch({ url: '/pages/index/index' })
+    await Taro.switchTab({ url: '/pages/index/index' })
     return true
   } catch (error) {
     const message = error instanceof Error ? error.message : ''
@@ -82,7 +82,7 @@ export async function ensureKid() {
       content: '请先在设置页添加孩子信息',
       confirmText: '去设置',
       success: (res) => {
-        if (res.confirm) Taro.navigateTo({ url: '/pages/settings/index' })
+        if (res.confirm) Taro.switchTab({ url: '/pages/settings/index' })
       }
     })
     return false

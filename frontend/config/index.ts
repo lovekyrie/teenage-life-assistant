@@ -17,7 +17,14 @@ const config = {
   plugins: [],
   defineConstants: {},
   copy: {
-    patterns: [],
+    patterns: [
+      { from: 'src/assets/ui/tab-home.png', to: 'dist/assets/ui/tab-home.png' },
+      { from: 'src/assets/ui/tab-home-active.png', to: 'dist/assets/ui/tab-home-active.png' },
+      { from: 'src/assets/ui/tab-rewards.png', to: 'dist/assets/ui/tab-rewards.png' },
+      { from: 'src/assets/ui/tab-rewards-active.png', to: 'dist/assets/ui/tab-rewards-active.png' },
+      { from: 'src/assets/ui/tab-settings.png', to: 'dist/assets/ui/tab-settings.png' },
+      { from: 'src/assets/ui/tab-settings-active.png', to: 'dist/assets/ui/tab-settings-active.png' }
+    ],
     options: {}
   },
   framework: 'react',

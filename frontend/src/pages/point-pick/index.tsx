@@ -1,6 +1,7 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
 import { useEffect, useMemo, useState } from 'react'
+import { uiImages } from '@/assets/ui'
 import { actionApi, recordApi } from '@/services/api'
 import { useAppStore } from '@/store/app'
 import { ensureAuth, ensureFamily, ensureKid, showError } from '@/utils/auth'
@@ -58,8 +59,19 @@ export default function PointPickPage() {
 
   return (
     <View className={`page point-pick-page ${type}`}>
+      <View className='point-hero'>
+        <View className='point-hero-copy'>
+          <Text className='point-eyebrow'>{type === 'add' ? '记录闪光时刻' : '温和提醒行为'}</Text>
+          <Text className='point-title'>{type === 'add' ? '增加积分' : '减少积分'}</Text>
+          <Text className='point-subtitle'>
+            {type === 'add' ? '选择孩子完成的好习惯，马上累积成长积分。' : '记录需要改进的行为，帮助规则持续稳定。'}
+          </Text>
+        </View>
+        <Image className='point-hero-icon' src={type === 'add' ? uiImages.actionStar : uiImages.actionAlert} mode='aspectFit' />
+      </View>
+
       {groups.length === 0 ? (
-        <View className='empty-tip'>暂无{type === 'add' ? '加分' : '减分'}行为，请先在设置页导入 Excel</View>
+        <View className='empty-card'>暂无{type === 'add' ? '加分' : '减分'}行为，请先在设置页导入 Excel</View>
       ) : (
         <>
           <View className='point-tabs'>
@@ -76,6 +88,7 @@ export default function PointPickPage() {
           <View className='action-list'>
             {currentGroup?.list.map((action) => (
               <View className='action-card card' key={action.id} onClick={() => !loading && handlePick(action)}>
+                <Image className='action-icon' src={type === 'add' ? uiImages.actionStar : uiImages.actionAlert} mode='aspectFit' />
                 <View className='action-head'>
                   <Text className='action-name'>{action.name}</Text>
                   <Text className='action-points'>{action.points} 分</Text>
