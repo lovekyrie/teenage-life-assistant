@@ -1,0 +1,17 @@
+<svg width="420" height="260" viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="260" rx="32" fill="#E6FAF6"/>
+  <path d="M268 222c22-64 68-105 137-123v123H268z" fill="#27C09F"/>
+  <path d="M319 224c9-69 32-125 70-168 3 67-17 123-70 168z" fill="#60D681"/>
+  <path d="M357 222c4-48 26-83 63-104v104h-63z" fill="#0B998B"/>
+  <circle cx="322" cy="120" r="28" fill="#FFFFFF" opacity=".75"/>
+  <circle cx="279" cy="141" r="22" fill="#FFFFFF" opacity=".65"/>
+  <rect x="38" y="44" width="134" height="134" rx="38" fill="#CFF6EE"/>
+  <path d="M58 102l47-38 48 38v52a10 10 0 0 1-10 10H68a10 10 0 0 1-10-10v-52z" fill="#18AFA3"/>
+  <circle cx="84" cy="121" r="10" fill="white"/>
+  <circle cx="106" cy="112" r="12" fill="white"/>
+  <circle cx="128" cy="121" r="10" fill="white"/>
+  <path d="M75 147c4-13 20-13 24 0M94 147c4-16 20-16 24 0M113 147c4-13 20-13 24 0" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <rect x="205" y="63" width="144" height="92" rx="18" fill="#FFFFFF"/>
+  <text x="277" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#687A7A">邀请码</text>
+  <text x="277" y="136" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#149C91">WAY3NQ</text>
+</svg>
