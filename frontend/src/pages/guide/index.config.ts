@@ -1,3 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: '使用说明'
+  navigationBarTitleText: '使用说明',
+  navigationStyle: 'custom'
 })

@@ -1,8 +1,10 @@
 import { View, Text, Image } from '@tarojs/components'
-import { Button, Cell, Field, Input, Tag } from '@taroify/core'
+import { Button, Field, Input, Tag } from '@taroify/core'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
-import { uiImages } from '@/assets/ui'
+import AppNavBar from '@/components/AppNavBar'
+import AssetImage from '@/components/AssetImage'
+import { remoteStaticUiAsset, resolveActionFallback, resolveImageUrl, resolveRewardFallback, uiImages } from '@/assets/ui'
 import { actionApi, familyApi, kidApi, rewardApi } from '@/services/api'
 import { downloadFile, getToken, uploadFile } from '@/services/request'
 import { useAppStore } from '@/store/app'
@@ -147,13 +149,8 @@ export default function SettingsPage() {
 
   return (
     <View className='page settings-page'>
-      <View className='settings-hero'>
-        <View>
-          <Text className='eyebrow'>{isLoggedIn ? '家庭管理' : '功能预览'}</Text>
-          <Text className='settings-title'>{isLoggedIn ? family?.name || '成长积分' : '设置家庭积分规则'}</Text>
-          <Text className='settings-subtitle'>管理孩子、积分行为、奖励模板和家庭成员</Text>
-        </View>
-        <Image className='settings-hero-image' src={uiImages.guideHero} mode='aspectFit' />
+      <View className='settings-top'>
+        <AppNavBar title='设置' showBack />
       </View>
 
       {!isLoggedIn ? (
@@ -164,22 +161,33 @@ export default function SettingsPage() {
         </View>
       ) : (
         <>
-          <View className='overview-grid'>
-            <View className='overview-card'>
-              <Text className='overview-label'>家庭</Text>
-              <Text className='overview-value'>{family?.name || '成长积分'}</Text>
-              <Text className='overview-desc'>{kids.length} 个孩子 · {actions.length} 个行为</Text>
+          <View className='family-panel'>
+            <View className='family-copy'>
+              <View className='family-title-row'>
+                <Image className='panel-icon' src={uiImages.iconFamily} mode='aspectFit' />
+                <View>
+                  <Text className='eyebrow'>家庭管理</Text>
+                  <Text className='settings-title'>{family?.name || '成长积分'}</Text>
+                  <Text className='settings-subtitle'>管理孩子、积分行为和奖励模板</Text>
+                </View>
+              </View>
             </View>
-            <View className='overview-card invite-card' onClick={copyInviteCode}>
+            <View className='invite-card' onClick={copyInviteCode}>
               <Text className='overview-label'>邀请码</Text>
               <Text className='overview-value'>{family?.invite_code || '-'}</Text>
-              <Text className='overview-desc'>点击复制给其他家长</Text>
+              <Text className='overview-desc'>点击复制</Text>
             </View>
+            <AssetImage
+              className='settings-hero-image'
+              src={remoteStaticUiAsset('settingsFamily')}
+              fallback={uiImages.guideHero}
+            />
           </View>
 
           <View className='card import-card'>
             <View className='card-header'>
-              <View>
+              <Image className='panel-icon' src={uiImages.iconUpload} mode='aspectFit' />
+              <View className='card-header-copy'>
                 <Text className='section-title'>数据导入</Text>
                 <Text className='hint'>下载模板后按表头填写，再上传 Excel。再次导入会按模板启用行为和奖励，历史记录保留。</Text>
               </View>
@@ -192,9 +200,18 @@ export default function SettingsPage() {
           </View>
 
           <View className='card'>
-            <Text className='section-title'>孩子管理</Text>
+            <View className='card-header'>
+              <Image className='panel-icon' src={uiImages.iconUser} mode='aspectFit' />
+              <View className='card-header-copy'>
+                <Text className='section-title'>孩子管理</Text>
+                {kids.length === 0 && <Text className='hint compact'>还没有孩子，请先添加姓名。</Text>}
+              </View>
+            </View>
             {kids.map((kid) => (
-              <Cell key={kid.id} title={kid.name} brief={`ID: ${kid.id}`} />
+              <View className='kid-row' key={kid.id}>
+                <Text className='kid-name'>{kid.name}</Text>
+                <Text className='kid-id'>ID: {kid.id}</Text>
+              </View>
             ))}
             <Field label='孩子姓名'>
               <Input
@@ -207,12 +224,20 @@ export default function SettingsPage() {
           </View>
 
           <View className='card'>
-            <Text className='section-title'>积分行为 ({actions.length})</Text>
+            <View className='card-header'>
+              <Image className='panel-icon small' src={uiImages.actionStar} mode='aspectFit' />
+              <Text className='section-title'>积分行为 ({actions.length})</Text>
+            </View>
             {actions.length === 0 ? (
               <Text className='empty-inline'>暂无行为</Text>
             ) : (
               actions.map((a) => (
                 <View className='manage-row' key={a.id}>
+                  <AssetImage
+                    className='manage-icon'
+                    src={resolveActionFallback(a.name)}
+                    fallback={a.type === 'add' ? uiImages.actionStar : uiImages.actionAlert}
+                  />
                   <View className='manage-info'>
                     <Text className='manage-name'>{a.name}</Text>
                     <View className='manage-meta'>
@@ -229,12 +254,20 @@ export default function SettingsPage() {
           </View>
 
           <View className='card'>
-            <Text className='section-title'>奖励 ({rewards.length})</Text>
+            <View className='card-header'>
+              <Image className='panel-icon small' src={uiImages.rewardGift} mode='aspectFit' />
+              <Text className='section-title'>奖励 ({rewards.length})</Text>
+            </View>
             {rewards.length === 0 ? (
               <Text className='empty-inline'>暂无奖励</Text>
             ) : (
               rewards.map((r) => (
                 <View className='manage-row' key={r.id}>
+                  <AssetImage
+                    className='manage-icon'
+                    src={resolveImageUrl(r.image_url) || resolveRewardFallback(r.name)}
+                    fallback={uiImages.rewardGift}
+                  />
                   <View className='manage-info'>
                     <Text className='manage-name'>{r.name}</Text>
                     <View className='manage-meta'>

@@ -1,3 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: '选择行为'
+  navigationBarTitleText: '选择行为',
+  navigationStyle: 'custom'
 })

@@ -1,8 +1,10 @@
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { Button } from '@taroify/core'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
-import { resolveImageUrl, uiImages } from '@/assets/ui'
+import AppNavBar from '@/components/AppNavBar'
+import AssetImage from '@/components/AssetImage'
+import { remoteStaticUiAsset, resolveImageUrl, resolveRewardFallback, uiImages } from '@/assets/ui'
 import { recordApi, redemptionApi, rewardApi } from '@/services/api'
 import { getToken } from '@/services/request'
 import { useAppStore } from '@/store/app'
@@ -122,14 +124,24 @@ export default function RewardsPage() {
 
   return (
     <View className='page rewards-page'>
+      <View className='rewards-top'>
+        <AppNavBar title='奖励兑换' showBack />
+      </View>
+
       <View className='rewards-hero'>
         <View className='hero-copy'>
-          <Text className='eyebrow'>{isLoggedIn ? '奖励兑换' : '奖励预览'}</Text>
           <Text className='hero-title'>当前可用积分</Text>
-          <Text className='summary-points'>{summary?.total_points ?? 0}</Text>
-          <Text className='link' onClick={openRedemptions}>查看兑换记录</Text>
+          <View className='points-line'>
+            <Text className='summary-points'>{summary?.total_points ?? 0}</Text>
+            <Text className='points-star'>★</Text>
+          </View>
+          <Text className='link' onClick={openRedemptions}>查看兑换记录 ›</Text>
         </View>
-        <Image className='hero-image' src={uiImages.rewardGift} mode='aspectFit' />
+        <AssetImage
+          className='hero-image'
+          src={remoteStaticUiAsset('rewardHero')}
+          fallback={uiImages.rewardGift}
+        />
       </View>
 
       {rewards.length === 0 ? (
@@ -137,10 +149,10 @@ export default function RewardsPage() {
       ) : (
         rewards.map((reward) => {
           const enough = (summary?.total_points ?? 0) >= reward.points_cost
-          const imageSrc = resolveImageUrl(reward.image_url) || uiImages.rewardGift
+          const imageSrc = resolveImageUrl(reward.image_url) || resolveRewardFallback(reward.name)
           return (
-            <View className={`card reward-card ${enough ? '' : 'not-enough'}`} key={reward.id}>
-              <Image className='reward-image' src={imageSrc} mode='aspectFit' />
+            <View className={`reward-card ${enough ? '' : 'not-enough'}`} key={reward.id}>
+              <AssetImage className='reward-image' src={imageSrc} fallback={uiImages.rewardGift} />
               <View className='reward-info'>
                 <Text className='reward-name'>{reward.name}</Text>
                 {reward.description && <Text className='reward-desc'>{reward.description}</Text>}

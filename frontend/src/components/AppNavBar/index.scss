@@ -1,0 +1,49 @@
+.app-nav {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.app-nav-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--app-nav-height);
+  padding: 0 28px;
+}
+
+.app-nav-title {
+  position: absolute;
+  right: 176px;
+  left: 176px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: var(--app-nav-height);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-nav-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.app-nav-back-mark {
+  display: block;
+  height: 66px;
+  color: #fff;
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 56px;
+}

@@ -1,7 +1,9 @@
-import { View, Text, ScrollView, Button, Image } from '@tarojs/components'
+import { View, Text, ScrollView, Image } from '@tarojs/components'
 import Taro, { useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { useState } from 'react'
-import { uiImages } from '@/assets/ui'
+import AppNavBar from '@/components/AppNavBar'
+import AssetImage from '@/components/AssetImage'
+import { remoteStaticUiAsset, uiImages } from '@/assets/ui'
 import { familyApi, recordApi, rewardApi } from '@/services/api'
 import { getToken } from '@/services/request'
 import { useAppStore } from '@/store/app'
@@ -120,6 +122,7 @@ export default function IndexPage() {
   const displayedSummary = isLoggedIn ? summary : guestSummary
   const displayedRecords = isLoggedIn ? records : guestRecords
   const displayedRewards = isLoggedIn ? rewards : guestRewards
+  const familyName = isLoggedIn ? family?.name || '成长积分' : '我们家'
 
   useShareAppMessage(() => ({
     title: `${family?.name || '成长积分'}：记录每一次进步，兑换小小奖励`,
@@ -192,25 +195,26 @@ export default function IndexPage() {
     }
   }
 
+  const recordIcon = (item: PointRecord) => {
+    const name = item.action?.name || item.note
+    if (item.type === 'subtract') return uiImages.iconChair
+    if (/作业|阅读|学习/.test(name)) return uiImages.iconBook
+    if (/起床|洗漱|早/.test(name)) return uiImages.iconSun
+    return uiImages.iconClock
+  }
+
   return (
     <View className='page home-page'>
-      <View className='home-hero'>
-        <View className='hero-top'>
-          <View>
-            <View className='hero-identity'>
-              <Image className='kid-avatar' src={uiImages.kidAvatar} mode='aspectFit' />
-              <View className='hero-copy'>
-                <Text className='family-label'>{isLoggedIn ? family?.name || '成长积分' : '功能预览'}</Text>
-                <Text className='hero-title'>{heroKidName} 的成长积分</Text>
-              </View>
+      <View className='home-top'>
+        <AppNavBar className='home-nav'>
+          <View className='home-nav-brand'>
+            <Image className='kid-avatar' src={uiImages.kidAvatar} mode='aspectFit' />
+            <View className='hero-copy'>
+              <Text className='hero-title'>成长积分</Text>
+              <Text className='family-label'>{familyName} · {heroKidName}</Text>
             </View>
           </View>
-          <View className='hero-actions'>
-            <Text className='hero-action' onClick={() => Taro.navigateTo({ url: '/pages/guide/index' })}>说明</Text>
-            <Button className='hero-action share-action' openType='share'>分享</Button>
-            <Text className='hero-action' onClick={() => requireLogin('/pages/settings/index', 'switchTab')}>设置</Text>
-          </View>
-        </View>
+        </AppNavBar>
 
         {visibleKids.length > 1 && (
           <ScrollView scrollX className='kid-scroll'>
@@ -226,42 +230,53 @@ export default function IndexPage() {
           </ScrollView>
         )}
 
-        <View className='hero-main'>
-          <View className='points-row'>
-            <View>
-              <Text className='points-label'>当前积分</Text>
-              <Text className='total-points'>{displayedSummary?.total_points ?? 0}</Text>
+        <View className='home-hero'>
+          <View className='hero-main'>
+            <View className='hero-copy-block'>
+              <Text className='hero-card-title'>{heroKidName}的成长积分</Text>
+              <Text className='hero-card-desc'>记录每一次成长，积累每一份美好</Text>
+              <View className='score-ring'>
+                <View className='score-ring-inner'>
+                  <Text className='points-label'>当前积分</Text>
+                  <Text className='total-points'>{displayedSummary?.total_points ?? 0}</Text>
+                  <Text className='ring-star'>★</Text>
+                </View>
+              </View>
             </View>
-            <View className='today-card'>
-              <Text className='today-label'>今日净变化</Text>
-              <Text className='today-net'>
+            <AssetImage
+              className='hero-art-wrap'
+              imageClassName='hero-art'
+              src={remoteStaticUiAsset('homeHero')}
+              fallback={uiImages.heroGrowth}
+            />
+          </View>
+
+          <View className='today-stats'>
+            <View className='stat-card'>
+              <Text className='stat-label'>今日净变化</Text>
+              <Text className='stat-value add'>
                 {displayedSummary && displayedSummary.today_net >= 0 ? '+' : ''}{displayedSummary?.today_net ?? 0}
               </Text>
             </View>
-          </View>
-          <View className='hero-art-wrap'>
-            <Image className='hero-art' src={uiImages.heroGrowth} mode='aspectFit' />
-          </View>
-        </View>
-
-        <View className='today-stats'>
-          <View className='stat-card'>
-            <Text className='stat-label'>今日加分</Text>
-            <Text className='stat-value add'>+{displayedSummary?.today_add ?? 0}</Text>
-          </View>
-          <View className='stat-card'>
-            <Text className='stat-label'>今日扣分</Text>
-            <Text className='stat-value sub'>-{displayedSummary?.today_sub ?? 0}</Text>
-          </View>
-          <View className='stat-card'>
-            <Text className='stat-label'>奖励数量</Text>
-            <Text className='stat-value'>{displayedRewards.length}</Text>
+            <View className='stat-card'>
+              <Text className='stat-label'>今日加分</Text>
+              <Text className='stat-value add'>+{displayedSummary?.today_add ?? 0}</Text>
+            </View>
+            <View className='stat-card'>
+              <Text className='stat-label'>今日扣分</Text>
+              <Text className='stat-value sub'>-{displayedSummary?.today_sub ?? 0}</Text>
+            </View>
+            <View className='stat-card'>
+              <Text className='stat-label'>奖励数量</Text>
+              <Text className='stat-value reward'>{displayedRewards.length}</Text>
+            </View>
           </View>
         </View>
       </View>
 
       {!isLoggedIn && (
         <View className='guest-notice'>
+          <Image className='guest-icon' src={uiImages.iconShield} mode='aspectFit' />
           <View className='guest-copy'>
             <Text className='guest-title'>先浏览功能服务</Text>
             <Text className='guest-desc'>当前展示示例数据，登录后再记录真实积分、管理奖励和家庭成员。</Text>
@@ -272,19 +287,22 @@ export default function IndexPage() {
 
       <View className='quick-grid'>
         <View className='quick-card add' onClick={() => goPointPick('add')}>
-          <Image className='quick-icon-img' src={uiImages.actionStar} mode='aspectFit' />
+          <Image className='quick-icon-img' src={uiImages.iconAdd} mode='aspectFit' />
           <Text className='quick-title'>增加积分</Text>
-          <Text className='quick-desc'>记录完成和进步</Text>
+          <Text className='quick-desc'>记录宝贝的进步</Text>
+          <Image className='quick-arrow' src={uiImages.iconArrowRight} mode='aspectFit' />
         </View>
         <View className='quick-card subtract' onClick={() => goPointPick('subtract')}>
-          <Image className='quick-icon-img' src={uiImages.actionAlert} mode='aspectFit' />
+          <Image className='quick-icon-img' src={uiImages.iconMinus} mode='aspectFit' />
           <Text className='quick-title'>减少积分</Text>
           <Text className='quick-desc'>记录需要提醒的行为</Text>
+          <Image className='quick-arrow red' src={uiImages.iconArrowRight} mode='aspectFit' />
         </View>
         <View className='quick-card reward' onClick={() => requireLogin('/pages/rewards/index', 'switchTab')}>
           <Image className='quick-icon-img' src={uiImages.rewardGift} mode='aspectFit' />
           <Text className='quick-title'>兑换奖励</Text>
           <Text className='quick-desc'>查看可兑换项目</Text>
+          <Image className='quick-arrow gold' src={uiImages.iconArrowRight} mode='aspectFit' />
         </View>
       </View>
 
@@ -298,7 +316,8 @@ export default function IndexPage() {
         ) : (
           displayedRecords.map((item) => (
             <View className='record-row' key={item.id}>
-              <View>
+              <Image className='record-icon' src={recordIcon(item)} mode='aspectFit' />
+              <View className='record-copy'>
                 <Text className='record-name'>{item.action?.name || item.note || '积分变动'}</Text>
                 <Text className='record-time'>{formatDateTime(item.created_at)}</Text>
               </View>
@@ -308,25 +327,6 @@ export default function IndexPage() {
             </View>
           ))
         )}
-      </View>
-
-      <View className='card content-card'>
-        <View className='card-header'>
-          <Text className='card-title'>可兑换奖励</Text>
-          <Text className='link' onClick={() => requireLogin('/pages/rewards/index', 'switchTab')}>更多</Text>
-        </View>
-        <ScrollView scrollX className='reward-scroll'>
-          {displayedRewards.map((reward) => {
-            const enough = (displayedSummary?.total_points ?? 0) >= reward.points_cost
-            return (
-              <View className={`reward-chip ${enough ? '' : 'disabled'}`} key={reward.id}>
-                <Text className='reward-name'>{reward.name}</Text>
-                <Text className='reward-cost'>{reward.points_cost} 分</Text>
-              </View>
-            )
-          })}
-          {displayedRewards.length === 0 && <Text className='empty-inline'>暂无奖励，可在设置页导入</Text>}
-        </ScrollView>
       </View>
     </View>
   )
