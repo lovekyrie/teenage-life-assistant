@@ -187,12 +187,21 @@
   }
 
   .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 108px;
-    padding: 18px 12px;
+    padding: 14px 10px 16px;
     background: rgba(255, 255, 255, 0.88);
     border-radius: 18px;
     box-shadow: 0 8px 24px rgba(22, 112, 104, 0.08);
     text-align: center;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
   }
 
   .stat-label {
@@ -207,8 +216,8 @@
 
   .stat-value {
     display: block;
-    margin-top: 8px;
-    font-size: 36px;
+    margin-top: 6px;
+    font-size: 34px;
     font-weight: 900;
     line-height: 1.1;
   }
@@ -278,15 +287,15 @@
   .quick-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: 16px;
     margin: 24px;
   }
 
   .quick-card {
     position: relative;
     box-sizing: border-box;
-    min-height: 220px;
-    padding: 26px 22px;
+    min-height: 184px;
+    padding: 22px 18px;
     overflow: hidden;
     background: #fff;
     border: 2px solid rgba(255, 255, 255, 0.9);
@@ -307,33 +316,36 @@
   }
 
   .quick-icon-img {
-    width: 74px;
-    height: 74px;
+    width: 62px;
+    height: 62px;
   }
 
   .quick-title {
     display: block;
-    margin-top: 22px;
+    margin-top: 18px;
     color: #172026;
-    font-size: 30px;
+    font-size: 29px;
     font-weight: 800;
     line-height: 1.25;
   }
 
   .quick-desc {
     display: block;
-    margin-top: 10px;
+    margin-top: 8px;
+    overflow: hidden;
     color: #5f7076;
-    font-size: 23px;
-    line-height: 1.35;
+    font-size: 22px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .quick-arrow {
     position: absolute;
-    right: 18px;
-    bottom: 18px;
-    width: 48px;
-    height: 48px;
+    right: 16px;
+    bottom: 16px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background: rgba(24, 175, 163, 0.1);
   }

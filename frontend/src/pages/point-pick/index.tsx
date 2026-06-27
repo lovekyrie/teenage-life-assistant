@@ -86,7 +86,7 @@ export default function PointPickPage() {
               <View className='action-card' key={action.id} onClick={() => !loading && handlePick(action)}>
                 <AssetImage
                   className='action-icon'
-                  src={resolveActionFallback(action.name)}
+                  src={resolveActionFallback(action.name, action.category)}
                   fallback={type === 'add' ? uiImages.actionStar : uiImages.actionAlert}
                 />
                 <View className='action-head'>

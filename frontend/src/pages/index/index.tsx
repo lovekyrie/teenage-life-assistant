@@ -253,20 +253,24 @@ export default function IndexPage() {
 
           <View className='today-stats'>
             <View className='stat-card'>
+              <Image className='stat-icon' src={uiImages.iconTrend} mode='aspectFit' />
               <Text className='stat-label'>今日净变化</Text>
               <Text className='stat-value add'>
                 {displayedSummary && displayedSummary.today_net >= 0 ? '+' : ''}{displayedSummary?.today_net ?? 0}
               </Text>
             </View>
             <View className='stat-card'>
+              <Image className='stat-icon' src={uiImages.iconAdd} mode='aspectFit' />
               <Text className='stat-label'>今日加分</Text>
               <Text className='stat-value add'>+{displayedSummary?.today_add ?? 0}</Text>
             </View>
             <View className='stat-card'>
+              <Image className='stat-icon' src={uiImages.iconMinus} mode='aspectFit' />
               <Text className='stat-label'>今日扣分</Text>
               <Text className='stat-value sub'>-{displayedSummary?.today_sub ?? 0}</Text>
             </View>
             <View className='stat-card'>
+              <Image className='stat-icon' src={uiImages.iconGiftLine} mode='aspectFit' />
               <Text className='stat-label'>奖励数量</Text>
               <Text className='stat-value reward'>{displayedRewards.length}</Text>
             </View>
@@ -289,19 +293,19 @@ export default function IndexPage() {
         <View className='quick-card add' onClick={() => goPointPick('add')}>
           <Image className='quick-icon-img' src={uiImages.iconAdd} mode='aspectFit' />
           <Text className='quick-title'>增加积分</Text>
-          <Text className='quick-desc'>记录宝贝的进步</Text>
+          <Text className='quick-desc'>记录宝贝进步</Text>
           <Image className='quick-arrow' src={uiImages.iconArrowRight} mode='aspectFit' />
         </View>
         <View className='quick-card subtract' onClick={() => goPointPick('subtract')}>
           <Image className='quick-icon-img' src={uiImages.iconMinus} mode='aspectFit' />
           <Text className='quick-title'>减少积分</Text>
-          <Text className='quick-desc'>记录需要提醒的行为</Text>
+          <Text className='quick-desc'>记录提醒行为</Text>
           <Image className='quick-arrow red' src={uiImages.iconArrowRight} mode='aspectFit' />
         </View>
         <View className='quick-card reward' onClick={() => requireLogin('/pages/rewards/index', 'switchTab')}>
           <Image className='quick-icon-img' src={uiImages.rewardGift} mode='aspectFit' />
           <Text className='quick-title'>兑换奖励</Text>
-          <Text className='quick-desc'>查看可兑换项目</Text>
+          <Text className='quick-desc'>查看兑换项目</Text>
           <Image className='quick-arrow gold' src={uiImages.iconArrowRight} mode='aspectFit' />
         </View>
       </View>

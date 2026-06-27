@@ -4,7 +4,7 @@ import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
 import AppNavBar from '@/components/AppNavBar'
 import AssetImage from '@/components/AssetImage'
-import { remoteStaticUiAsset, resolveActionFallback, resolveImageUrl, resolveRewardFallback, uiImages } from '@/assets/ui'
+import { resolveActionFallback, resolveImageUrl, resolveRewardFallback, uiImages } from '@/assets/ui'
 import { actionApi, familyApi, kidApi, rewardApi } from '@/services/api'
 import { downloadFile, getToken, uploadFile } from '@/services/request'
 import { useAppStore } from '@/store/app'
@@ -177,11 +177,6 @@ export default function SettingsPage() {
               <Text className='overview-value'>{family?.invite_code || '-'}</Text>
               <Text className='overview-desc'>点击复制</Text>
             </View>
-            <AssetImage
-              className='settings-hero-image'
-              src={remoteStaticUiAsset('settingsFamily')}
-              fallback={uiImages.guideHero}
-            />
           </View>
 
           <View className='card import-card'>
@@ -193,8 +188,14 @@ export default function SettingsPage() {
               </View>
             </View>
             <View className='import-actions'>
-              <Button color='primary' block onClick={handleDownloadTemplate}>下载模板</Button>
-              <Button block variant='outlined' onClick={handleImportExcel}>上传 Excel</Button>
+              <Button color='primary' block onClick={handleDownloadTemplate}>
+                <Image className='button-icon' src={uiImages.iconDownload} mode='aspectFit' />
+                <Text>下载模板</Text>
+              </Button>
+              <Button block variant='outlined' onClick={handleImportExcel}>
+                <Image className='button-icon' src={uiImages.iconUpload} mode='aspectFit' />
+                <Text>上传 Excel</Text>
+              </Button>
             </View>
             <Text className='guide-link' onClick={() => Taro.navigateTo({ url: '/pages/guide/index' })}>查看使用说明</Text>
           </View>
@@ -235,7 +236,7 @@ export default function SettingsPage() {
                 <View className='manage-row' key={a.id}>
                   <AssetImage
                     className='manage-icon'
-                    src={resolveActionFallback(a.name)}
+                    src={resolveActionFallback(a.name, a.category)}
                     fallback={a.type === 'add' ? uiImages.actionStar : uiImages.actionAlert}
                   />
                   <View className='manage-info'>
