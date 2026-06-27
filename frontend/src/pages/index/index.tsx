@@ -3,7 +3,7 @@ import Taro, { useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { useState } from 'react'
 import AppNavBar from '@/components/AppNavBar'
 import AssetImage from '@/components/AssetImage'
-import { remoteStaticUiAsset, uiImages } from '@/assets/ui'
+import { remoteStaticUiAsset, resolveActionFallback, uiImages } from '@/assets/ui'
 import { familyApi, recordApi, rewardApi } from '@/services/api'
 import { getToken } from '@/services/request'
 import { useAppStore } from '@/store/app'
@@ -195,14 +195,6 @@ export default function IndexPage() {
     }
   }
 
-  const recordIcon = (item: PointRecord) => {
-    const name = item.action?.name || item.note
-    if (item.type === 'subtract') return uiImages.iconChair
-    if (/作业|阅读|学习/.test(name)) return uiImages.iconBook
-    if (/起床|洗漱|早/.test(name)) return uiImages.iconSun
-    return uiImages.iconClock
-  }
-
   return (
     <View className='page home-page'>
       <View className='home-top'>
@@ -320,7 +312,11 @@ export default function IndexPage() {
         ) : (
           displayedRecords.map((item) => (
             <View className='record-row' key={item.id}>
-              <Image className='record-icon' src={recordIcon(item)} mode='aspectFit' />
+              <AssetImage
+                className='record-icon'
+                src={resolveActionFallback(item.action?.name || item.note, item.action?.category)}
+                fallback={item.type === 'subtract' ? uiImages.actionAlert : uiImages.actionStar}
+              />
               <View className='record-copy'>
                 <Text className='record-name'>{item.action?.name || item.note || '积分变动'}</Text>
                 <Text className='record-time'>{formatDateTime(item.created_at)}</Text>

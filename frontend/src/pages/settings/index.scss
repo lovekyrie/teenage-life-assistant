@@ -161,12 +161,16 @@
   }
 
   .import-actions .taroify-button__content {
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    line-height: 1;
   }
 
   .button-icon {
-    width: 36px;
-    height: 36px;
+    display: block;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
   }
 
   .guide-link {

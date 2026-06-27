@@ -189,11 +189,11 @@ export default function SettingsPage() {
             </View>
             <View className='import-actions'>
               <Button color='primary' block onClick={handleDownloadTemplate}>
-                <Image className='button-icon' src={uiImages.iconDownload} mode='aspectFit' />
+                <Image className='button-icon' src={uiImages.iconDownloadWhite} mode='aspectFit' />
                 <Text>下载模板</Text>
               </Button>
               <Button block variant='outlined' onClick={handleImportExcel}>
-                <Image className='button-icon' src={uiImages.iconUpload} mode='aspectFit' />
+                <Image className='button-icon' src={uiImages.iconUploadPlain} mode='aspectFit' />
                 <Text>上传 Excel</Text>
               </Button>
             </View>

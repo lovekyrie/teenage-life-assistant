@@ -9,6 +9,7 @@ import iconChair from './icon-chair.svg'
 import iconChild from './icon-child.svg'
 import iconClock from './icon-clock.svg'
 import iconDownload from './icon-download.svg'
+import iconDownloadWhite from './icon-download-white.svg'
 import iconFamily from './icon-family.svg'
 import iconFileExcel from './icon-file-excel.svg'
 import iconGiftLine from './icon-gift-line.svg'
@@ -19,6 +20,7 @@ import iconShield from './icon-shield.svg'
 import iconSun from './icon-sun.svg'
 import iconTrend from './icon-trend.svg'
 import iconUpload from './icon-upload.svg'
+import iconUploadPlain from './icon-upload-plain.svg'
 import iconUser from './icon-user.svg'
 import kidAvatar from './kid-avatar.svg'
 import rewardGift from './reward-gift.svg'
@@ -35,6 +37,7 @@ export const uiImages = {
   iconChild,
   iconClock,
   iconDownload,
+  iconDownloadWhite,
   iconFamily,
   iconFileExcel,
   iconGiftLine,
@@ -45,6 +48,7 @@ export const uiImages = {
   iconSun,
   iconTrend,
   iconUpload,
+  iconUploadPlain,
   iconUser,
   kidAvatar,
   rewardGift
@@ -73,7 +77,10 @@ export const staticUiAssets = {
   actionEnglish: 'action-english.svg',
   actionReading: 'action-reading.svg',
   actionExercise: 'action-exercise.svg',
-  actionMedal: 'action-medal.svg'
+  actionMedal: 'action-medal.svg',
+  actionDishonest: 'action-dishonest.svg',
+  actionTantrum: 'action-tantrum.svg',
+  actionAggression: 'action-aggression.svg'
 } as const
 
 export function remoteUiAsset(filename: string) {
@@ -102,11 +109,14 @@ export function resolveRewardFallback(name: string) {
 
 export function resolveActionFallback(name: string, category = '') {
   const text = `${name} ${category}`
+  if (/说话不算数|骗人|撒谎|不诚实|赖账/.test(text)) return remoteStaticUiAsset('actionDishonest')
+  if (/幼儿园|上学|上课|课堂|老师/.test(text)) return remoteStaticUiAsset('actionSchool')
+  if (/发脾气|大哭|哭闹|大闹|情绪失控/.test(text)) return remoteStaticUiAsset('actionTantrum')
+  if (/打人|咬人|推人|踢人|攻击/.test(text)) return remoteStaticUiAsset('actionAggression')
   if (/刷牙|牙/.test(text)) return remoteStaticUiAsset('actionToothbrush')
   if (/衣服|穿衣|整理衣/.test(text)) return remoteStaticUiAsset('actionClothes')
   if (/蔬菜|青菜|吃菜/.test(text)) return remoteStaticUiAsset('actionVegetables')
   if (/睡觉|上床|午睡|早睡|熄灯/.test(text)) return remoteStaticUiAsset('actionSleep')
-  if (/幼儿园|上学|上课|课堂|老师/.test(text)) return remoteStaticUiAsset('actionSchool')
   if (/起床|洗漱|早/.test(text)) return remoteStaticUiAsset('actionWakeup')
   if (/家务|帮忙|收拾餐|扫地|拖地|洗碗/.test(text)) return remoteStaticUiAsset('actionHousework')
   if (/朋友|打招呼|分享|合作|礼貌|问好/.test(text)) return remoteStaticUiAsset('actionFriends')
